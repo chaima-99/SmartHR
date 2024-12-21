@@ -1,14 +1,16 @@
-from fastapi import HTTPException
+from typing import Dict
+from uuid import uuid4
+from fastapi import HTTPException, Response
 from sqlalchemy.orm import Session
 from app import models, schemas
 from passlib.context import CryptContext # type: ignore
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
-
+sessions: Dict[str, str] = {}
 def hash_password(password: str) -> str:
     return pwd_context.hash(password)
 
-def create_admin(db: Session, admin: schemas.Admin):
+def create_admin(db: Session, admin: schemas.Admin,response: Response):
     existing_admin = db.query(models.Admin).filter(models.Admin.username == admin.username).first()
     if existing_admin:
         raise HTTPException(status_code=400, detail="Email already registered")
@@ -17,7 +19,15 @@ def create_admin(db: Session, admin: schemas.Admin):
     db.add(admin)
     db.commit()
     db.refresh(admin)
+
+    session_id = str(uuid4())
+    sessions[session_id] = admin.id
+
+    response.set_cookie(key="session_id", value=session_id)
+    print(sessions[session_id])
     return admin
+
+
 
 def get_employe(db: Session):
     return db.query(models.Employe).all()

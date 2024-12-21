@@ -4,6 +4,7 @@ from pydantic import BaseModel, EmailStr, Field
 
 
 class Admin(BaseModel):
+    id: int
     username: str
     password: str
 

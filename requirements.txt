@@ -5,3 +5,4 @@ pymysql
 passlib
 bcrypt
 fastapi[email]
+pydantic[email]
