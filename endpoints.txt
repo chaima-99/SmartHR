@@ -4,10 +4,6 @@ ADMIN:
     VOL_2:
         POST /admin/check-system/configure : Configuration du système
         GET /admin/check-records : Vue d'ensemble des enregistrements
-    VOL_4:
-        GET /hr/leaves : Liste de toutes les demandes de congés
-        PUT /hr/leaves/{leave_id} : Validation/refus des demandes
-
 
 RH:
     VOL_1:
@@ -39,12 +35,11 @@ RH:
 EMPLOYE:
     VOL_1:
         POST /auth/employee/login : Authentification
-        GET /employee/dashboard : Accès au tableau de bord
         GET /employee/profile : Consultation du profil
         PUT /employee/profile : Modification du profil
     VOL_2;
         POST /employee/check : Enregistrement check-in/check-out avec reconnaissance faciale
-        GET /employee/dashboard : Tableau de bord personnel
+        GET /employee/dashboard : Tableau de bord personnel ??
         GET /employee/check-history : Historique des pointages        
     VOL_3:
         GET /employee/tasks : Consultation des tâches assignées
