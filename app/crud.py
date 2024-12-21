@@ -24,3 +24,6 @@ def get_employe(db: Session):
 
 def get_RH(db: Session):
     return db.query(models.RessourceHumaine).all()
+
+def get_tache(db: Session):
+    return db.query(models.Tache).all()

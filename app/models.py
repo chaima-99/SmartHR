@@ -34,4 +34,8 @@ class RessourceHumaine(Base):
     DNRH = Column(Date, nullable=False)
     MailRH = Column(String(100), unique=True, nullable=False)
 
- 
+class Tache(Base):
+    __tablename__ = "tache"
+
+    IDTache = Column(Integer, primary_key=True, index=True)
+    NomTache = Column(String(100), nullable=False)

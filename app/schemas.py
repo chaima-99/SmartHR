@@ -27,3 +27,8 @@ class RessourceHumaine(BaseModel):
     PrenomRH: str
     DNRH: date
     MailRH: EmailStr
+
+# Schéma pour la lecture des tâches
+class Tache(BaseModel):
+    IDTache: int
+    NomTache: str

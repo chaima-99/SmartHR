@@ -46,6 +46,10 @@ def get_employe(db: Session = Depends(get_db)):
 def get_RH(db: Session = Depends(get_db)):
     return crud.get_RH(db=db)
 
+@app.get("/TACHE", response_model=List[schemas.Tache])
+def get_tache(db: Session = Depends(get_db)):
+    return crud.get_tache(db=db)
+
 
 
 
