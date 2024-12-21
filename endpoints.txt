@@ -1,0 +1,57 @@
+ADMIN:
+    VOL_1:
+        POST /admin/users : Création de comptes utilisateurs (RH et employés)
+    VOL_2:
+        POST /admin/check-system/configure : Configuration du système
+        GET /admin/check-records : Vue d'ensemble des enregistrements
+    VOL_4:
+        GET /hr/leaves : Liste de toutes les demandes de congés
+        PUT /hr/leaves/{leave_id} : Validation/refus des demandes
+
+
+RH:
+    VOL_1:
+        POST /auth/login : Authentification
+        GET /hr/employees : Liste des employés
+        PUT /hr/employees/{employee_id} : Modification des informations d'un employé
+    VOL_2:
+        GET /hr/attendance/{employee_id} : Consultation des heures de présence
+        GET /hr/statistics/global : Statistiques globales
+        GET /hr/statistics/employee/{employee_id} : Statistiques par employé
+    VOL_3:
+        POST /hr/tasks : Création et attribution des tâches
+        GET /hr/tasks : Vue d'ensemble de toutes les tâches
+        GET /hr/tasks/employee/{employee_id} : Tâches par employé
+    VOL_4:
+        GET /hr/leaves : Liste de toutes les demandes de congés
+        PUT /hr/leaves/{leave_id} : Validation/refus des demandes
+    VOL_5:
+        Pour les Statistiques :
+        GET /hr/dashboard/stats/global : Statistiques globales de présence
+        GET /hr/dashboard/stats/departments : Statistiques par département
+        GET /hr/dashboard/trends : Analyse des tendances
+            -------
+        Pour les Prédictions :
+        GET /hr/predictions/absences : Prédictions d'absentéisme
+        GET /hr/predictions/factors : Facteurs influençant les prédictions
+
+
+EMPLOYE:
+    VOL_1:
+        POST /auth/employee/login : Authentification
+        GET /employee/dashboard : Accès au tableau de bord
+        GET /employee/profile : Consultation du profil
+        PUT /employee/profile : Modification du profil
+    VOL_2;
+        POST /employee/check : Enregistrement check-in/check-out avec reconnaissance faciale
+        GET /employee/dashboard : Tableau de bord personnel
+        GET /employee/check-history : Historique des pointages        
+    VOL_3:
+        GET /employee/tasks : Consultation des tâches assignées
+        PUT /employee/tasks/{task_id} : Mise à jour du statut des tâches
+        GET /employee/tasks/statistics : Statistiques personnelles
+    VOL_4:
+        POST /employee/leaves : Soumission d'une demande de congés
+        GET /employee/leaves : Consultation des demandes personnelles
+        GET /employee/leaves/balance : Consultation du solde de congés
+
