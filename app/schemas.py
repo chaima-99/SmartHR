@@ -1,4 +1,4 @@
-from datetime import date
+from datetime import date, time
 from typing import Optional
 from pydantic import BaseModel, EmailStr
 
@@ -32,3 +32,16 @@ class RessourceHumaine(BaseModel):
 class Tache(BaseModel):
     IDTache: int
     NomTache: str
+
+class EmployeTache(BaseModel):
+    IDEmploye: int
+    IDTache: int
+    EtatTache: str
+
+class Historique(BaseModel):
+    IDHistorique: int
+    Date: date
+    Heure: time
+    EventName: str
+    IDEmploye: int
+

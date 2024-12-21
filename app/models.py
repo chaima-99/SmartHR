@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Date, Integer, String
+from sqlalchemy import Column, Date, ForeignKey, Integer, String, Time
 from sqlalchemy.ext.declarative import declarative_base
 
 Base = declarative_base()
@@ -37,5 +37,21 @@ class RessourceHumaine(Base):
 class Tache(Base):
     __tablename__ = "tache"
 
-    IDTache = Column(Integer, primary_key=True, index=True)
+    IDTache = Column(Integer, primary_key=True)
     NomTache = Column(String(100), nullable=False)
+
+class EmployeTache(Base):
+    __tablename__ = "employe_tache"
+
+    IDEmploye = Column(Integer, ForeignKey("employe.id"), primary_key=True)
+    IDTache = Column(Integer, ForeignKey("tache.IDTache"), primary_key=True)
+    EtatTache = Column(String(50), nullable=False)
+
+class Historique(Base):
+    __tablename__ = "historique"
+
+    IDHistorique = Column(Integer, primary_key=True, autoincrement=True)
+    Date = Column(Date, nullable=False)
+    Heure = Column(Time, nullable=False)
+    EventName = Column(String(50), nullable=False)  # Changement de ENUM à VARCHAR(50)
+    IDEmploye = Column(Integer, ForeignKey("employe.id"), nullable=False)

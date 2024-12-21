@@ -27,3 +27,9 @@ def get_RH(db: Session):
 
 def get_tache(db: Session):
     return db.query(models.Tache).all()
+
+def get_employe_tache(db: Session):
+    return db.query(models.EmployeTache).all()
+
+def get_historique(db: Session):
+    return db.query(models.Historique).all()

@@ -50,6 +50,14 @@ def get_RH(db: Session = Depends(get_db)):
 def get_tache(db: Session = Depends(get_db)):
     return crud.get_tache(db=db)
 
+@app.get("/EMPLOYE-TACHE", response_model=List[schemas.EmployeTache])
+def get_employe_tache(db: Session = Depends(get_db)):
+    return crud.get_employe_tache(db=db)
+
+@app.get("/HISTORIQUE", response_model=List[schemas.Historique])
+def get_historique(db: Session = Depends(get_db)):
+    return crud.get_historique(db=db)
+
 
 
 
