@@ -28,7 +28,6 @@ app.add_middleware(
     allow_credentials=True,
     allow_methods=["*"],  # Permet toutes les méthodes HTTP
     allow_headers=["*"],  # Permet tous les en-têtes
-
 )
 sessions: Dict[str, str] = {}
 
@@ -41,7 +40,7 @@ def read_root():
 def get_employe(db: Session = Depends(get_db)):
     return crud.get_employe(db=db)
 
-@app.get("/RH", response_model=List[schemas.RessourceHumaine])
+@app.get("/RH", response_model=List[schemas.Ressource_Humaine])
 def get_RH(db: Session = Depends(get_db)):
     return crud.get_RH(db=db)
 
@@ -81,7 +80,12 @@ def create_employ(
 ):
     return crud.create_employ(db=db, employ=employ)
 
-
+@app.post("/add_RH", response_model=schemas.Ressource_Humaine)
+def create_RH(
+    RH: schemas.Ressource_Humaine, 
+    db: Session = Depends(get_db)
+):
+    return crud.create_RH(db=db, RH=RH)
 
 
 

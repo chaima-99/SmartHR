@@ -65,3 +65,20 @@ def create_employ(db: Session, employ: schemas.Employe):
     db.refresh(employ)
 
     return employ
+
+
+def create_RH(db: Session, rh: schemas.Ressource_Humaine):
+    existing_rh = db.query(models.Ressource_Humaine).filter(models.Ressource_Humaine.UserName == rh.UserName).first()
+    if existing_rh:
+        raise HTTPException(status_code=400, detail="RH already registered")
+    rh = models.Ressource_Humaine(UserName=rh.UserName,
+                                    PassWord=hash_password(rh.PassWord),
+                                    NomRH=rh.NomRH,
+                                    DNRH=rh.DNRH,
+                                    PrenomRH =rh.PrenomRH,
+                                    MailRH=rh.MailRH)
+    db.add(rh)
+    db.commit()
+    db.refresh(rh)
+
+    return rh

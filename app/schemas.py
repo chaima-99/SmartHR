@@ -20,7 +20,7 @@ class Employe(BaseModel):
     PassWord: str
 
 # Schéma de base pour l'entrée des données des RH:
-class RessourceHumaine(BaseModel):
+class Ressource_Humaine(BaseModel):
     id: int
     UserName: str
     PassWord: str
@@ -28,6 +28,7 @@ class RessourceHumaine(BaseModel):
     PrenomRH: str
     DNRH: date
     MailRH: EmailStr
+    photo: Optional[str] = None
 
 # Schéma pour la lecture des tâches
 class Tache(BaseModel):

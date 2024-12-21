@@ -23,8 +23,8 @@ class Employe(Base):
     Horaire = Column(String(50), nullable=True)
     Photo = Column(String(255), nullable=True)
 
-class RessourceHumaine(Base):
-    __tablename__ = "ressourcehumaine"
+class Ressource_Humaine(Base):
+    __tablename__ = "ressource_humaine"
 
     id = Column(Integer, primary_key=True)
     UserName = Column(String(50), unique=True, nullable=False)
@@ -33,6 +33,7 @@ class RessourceHumaine(Base):
     PrenomRH = Column(String(100), nullable=False)
     DNRH = Column(Date, nullable=False)
     MailRH = Column(String(100), unique=True, nullable=False)
+    photo= Column(String(255), nullable=True)
 
 class Tache(Base):
     __tablename__ = "tache"
