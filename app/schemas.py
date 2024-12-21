@@ -1,6 +1,6 @@
 from datetime import date, time
 from typing import Optional
-from pydantic import BaseModel, EmailStr
+from pydantic import BaseModel, EmailStr, Field
 
 
 class Admin(BaseModel):
@@ -45,3 +45,17 @@ class Historique(BaseModel):
     EventName: str
     IDEmploye: int
 
+class Conge(BaseModel):
+    IdConge: int
+    DateDebut: date
+    DateFin: date
+    Motif: Optional[str] = None
+    EtatConge: Optional[str] = None
+    PhotoMotif: Optional[str] = None
+    IDEmploye: int
+
+class Abscence(BaseModel):
+    IDAbscence: int
+    Mois: int = Field(..., ge=1, le=12, description="Month of the absence (1-12)")
+    Jour: int = Field(..., ge=1, le=31, description="Day of the absence (1-31)")
+    IDEmploye: int

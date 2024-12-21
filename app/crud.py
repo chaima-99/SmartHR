@@ -33,3 +33,9 @@ def get_employe_tache(db: Session):
 
 def get_historique(db: Session):
     return db.query(models.Historique).all()
+
+def get_conge(db: Session):
+    return db.query(models.Conge).all()
+
+def get_abscence(db: Session):
+    return db.query(models.Abscence).all()

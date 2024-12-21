@@ -58,6 +58,13 @@ def get_employe_tache(db: Session = Depends(get_db)):
 def get_historique(db: Session = Depends(get_db)):
     return crud.get_historique(db=db)
 
+@app.get("/CONGE", response_model=List[schemas.Conge])
+def get_conge(db: Session = Depends(get_db)):
+    return crud.get_conge(db=db)
+
+@app.get("/ABSCENCE", response_model=List[schemas.Abscence])
+def get_abscence(db: Session = Depends(get_db)):
+    return crud.get_abscence(db=db)
 
 
 

@@ -55,3 +55,22 @@ class Historique(Base):
     Heure = Column(Time, nullable=False)
     EventName = Column(String(50), nullable=False)  # Changement de ENUM à VARCHAR(50)
     IDEmploye = Column(Integer, ForeignKey("employe.id"), nullable=False)
+
+class Conge(Base):
+    __tablename__ = "conge"
+
+    IdConge = Column(Integer, primary_key=True, index=True, autoincrement=True)
+    DateDebut = Column(Date, nullable=False)
+    DateFin = Column(Date, nullable=False)
+    Motif = Column(String(255), nullable=False)
+    EtatConge = Column(String(255), nullable=False)
+    PhotoMotif = Column(String(255), nullable=True)
+    IDEmploye = Column(Integer, ForeignKey("employe.id"), nullable=False)
+
+class Abscence(Base):
+    __tablename__ = "abscence"
+
+    IDAbscence = Column(Integer, primary_key=True, index=True, autoincrement=True)
+    Mois = Column(Integer, nullable=False)
+    Jour = Column(Integer, nullable=False)
+    IDEmploye = Column(Integer, ForeignKey("employe.id", ondelete="CASCADE"), nullable=False)
