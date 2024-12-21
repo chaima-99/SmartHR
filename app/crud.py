@@ -1,13 +1,12 @@
-from typing import Dict
+from typing import Dict, Union
 from uuid import uuid4
 from fastapi import HTTPException, Response
 from sqlalchemy.orm import Session
 from app import models, schemas
 from passlib.context import CryptContext # type: ignore
-import os
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
-sessions: Dict[str, str] = {}
+sessions = {}
 def hash_password(password: str) -> str:
     return pwd_context.hash(password)
 
@@ -67,7 +66,6 @@ def create_employ(db: Session, employ: schemas.Employe):
 
     return employ
 
-
 def create_RH(db: Session, rh: schemas.RessourceHumaine):
     existing_rh = db.query(models.RessourceHumaine).filter(models.RessourceHumaine.UserName == rh.UserName).first()
     if existing_rh:
@@ -85,4 +83,35 @@ def create_RH(db: Session, rh: schemas.RessourceHumaine):
 
     return rh
 
+def login(db: Session, username: str, password: str, response: Response):
+    try:
+        # Check Admin table
+        admin =db.query(models.Admin).filter(models.Admin.username == username).first()
+        if admin and pwd_context.verify(password, admin.password):
+            session_id = str(uuid4())
+            sessions[session_id] = {"id": admin.id, "role": "admin"}
+            response.set_cookie(key="session_id", value=session_id)
+            return {"user": admin, "role": "admin"}
+
+        # Check Employe table
+        employe = db.query(models.Employe).filter(models.Employe.UserName == username).first()
+        if employe and pwd_context.verify(password, employe.PassWord):
+            session_id = str(uuid4())
+            sessions[session_id] = {"id": employe.id, "role": "employe"}
+            response.set_cookie(key="session_id", value=session_id)
+            return {"user": employe, "role": "employe"}
+
+        # Check RessourceHumaine table
+        rh = db.query(models.RessourceHumaine).filter(models.RessourceHumaine.UserName == username).first()
+        if rh and pwd_context.verify(password, rh.PassWord):
+            session_id = str(uuid4())
+            sessions[session_id] = {"id": rh.id, "role": "rh"}
+            response.set_cookie(key="session_id", value=session_id)
+            return {"user": rh, "role": "rh"}
+
+        raise HTTPException(status_code=400, detail="Incorrect username or password")
+
+    except Exception as e:
+        print(f"Erreur interne : {e}")
+        raise HTTPException(status_code=500, detail="Erreur interne du serveur")
 

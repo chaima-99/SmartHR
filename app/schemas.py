@@ -1,6 +1,8 @@
 from datetime import date, time
-from typing import Optional
+from typing import Any, Optional
 from pydantic import BaseModel, EmailStr, Field
+from typing import Union
+
 
 
 class Admin(BaseModel):
@@ -61,3 +63,7 @@ class Abscence(BaseModel):
     Mois: int = Field(..., ge=1, le=12, description="Month of the absence (1-12)")
     Jour: int = Field(..., ge=1, le=31, description="Day of the absence (1-31)")
     IDEmploye: int
+
+class LoginResponse(BaseModel):
+    user: Union[Admin, Employe, RessourceHumaine]
+    role: str

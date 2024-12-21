@@ -65,7 +65,7 @@ def get_abscence(db: Session = Depends(get_db)):
     return crud.get_abscence(db=db)
 
 
-@app.post("/a", response_model=schemas.Admin)
+@app.post("/add/admin", response_model=schemas.Admin)
 def create_admin(
     admin: schemas.Admin, 
     response: Response,  # Add this parameter
@@ -86,6 +86,17 @@ def create_RH(
     db: Session = Depends(get_db)
 ):  
     return crud.create_RH(db=db, rh=RH)
+
+
+@app.post("/auth/login", response_model=schemas.LoginResponse)
+def login(
+    username: str,
+    password: str,
+    response: Response,
+    db: Session = Depends(get_db)
+):
+    return crud.login(db=db, username=username, password=password, response=response)
+    
 
 
 

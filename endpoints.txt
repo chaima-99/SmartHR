@@ -1,8 +1,8 @@
 ADMIN:
     VOL_1:
-        POST /admin/users : Création de comptes utilisateurs (RH et employés)
+        POST /admin/users : Création de comptes utilisateurs (RH et employés) -------
     VOL_2:
-        POST /admin/check-system/configure : Configuration du système
+        POST /admin/check-system/configure : Configuration du système 
         GET /admin/check-records : Vue d'ensemble des enregistrements
 
 RH:
