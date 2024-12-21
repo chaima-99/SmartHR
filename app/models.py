@@ -22,3 +22,16 @@ class Employe(Base):
     Mail = Column(String(100), unique=True, nullable=False)
     Horaire = Column(String(50), nullable=True)
     Photo = Column(String(255), nullable=True)
+
+class RessourceHumaine(Base):
+    __tablename__ = "ressourcehumaine"
+
+    id = Column(Integer, primary_key=True)
+    UserName = Column(String(50), unique=True, nullable=False)
+    PassWord = Column(String(255), nullable=False)
+    NomRH = Column(String(100), nullable=False)
+    PrenomRH = Column(String(100), nullable=False)
+    DNRH = Column(Date, nullable=False)
+    MailRH = Column(String(100), unique=True, nullable=False)
+
+ 

@@ -42,6 +42,11 @@ def create_admin(admin: schemas.Admin, db: Session = Depends(get_db)):
 def get_employe(db: Session = Depends(get_db)):
     return crud.get_employe(db=db)
 
+@app.get("/RH", response_model=List[schemas.RessourceHumaine])
+def get_RH(db: Session = Depends(get_db)):
+    return crud.get_RH(db=db)
+
+
 
 
 

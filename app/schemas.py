@@ -17,3 +17,13 @@ class Employe(BaseModel):
     Horaire: Optional[str] = None
     Photo: Optional[str] = None
     PassWord: str
+
+# Schéma de base pour l'entrée des données des RH:
+class RessourceHumaine(BaseModel):
+    id: int
+    UserName: str
+    PassWord: str
+    NomRH: str
+    PrenomRH: str
+    DNRH: date
+    MailRH: EmailStr

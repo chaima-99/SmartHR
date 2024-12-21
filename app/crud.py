@@ -1,7 +1,7 @@
 from fastapi import HTTPException
 from sqlalchemy.orm import Session
 from app import models, schemas
-from passlib.context import CryptContext
+from passlib.context import CryptContext # type: ignore
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
@@ -21,3 +21,6 @@ def create_admin(db: Session, admin: schemas.Admin):
 
 def get_employe(db: Session):
     return db.query(models.Employe).all()
+
+def get_RH(db: Session):
+    return db.query(models.RessourceHumaine).all()
