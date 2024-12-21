@@ -52,8 +52,14 @@ def create_employ(db: Session, employ: schemas.Employe):
     existing_employ = db.query(models.Employe).filter(models.Employe.UserName == employ.UserName).first()
     if existing_employ:
         raise HTTPException(status_code=400, detail="Employ already registered")
-    
-    employ = models.Employe(UserName=employ.UserName, PassWord=hash_password(employ.PassWord))
+    employ = models.Employe(UserName=employ.UserName,
+                            PassWord=hash_password(employ.PassWord),
+                            Nom=employ.Nom,
+                            DN=employ.DN,
+                            Prenom =employ.Prenom,
+                            Mail=employ.Mail,
+                            Horaire=employ.Horaire,
+                            Photo=employ.Photo)
     db.add(employ)
     db.commit()
     db.refresh(employ)
