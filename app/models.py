@@ -3,9 +3,8 @@ from sqlalchemy.ext.declarative import declarative_base
 
 Base = declarative_base()
 
-class User(Base):
-    __tablename__ = "fortest"
-
+class Admin(Base):
+    __tablename__ = "admin"
     id = Column(Integer, primary_key=True)
-    name = Column(String(50))
-    email = Column(String(100))
+    username = Column(String(100))
+    password = Column(String(100))
