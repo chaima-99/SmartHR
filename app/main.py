@@ -85,7 +85,7 @@ def create_RH(
     RH: schemas.RessourceHumaine, 
     db: Session = Depends(get_db)
 ):  
-    return crud.create_RH(db=db, RH=RH)
+    return crud.create_RH(db=db, rh=RH)
 
 
 

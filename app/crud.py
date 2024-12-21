@@ -69,7 +69,6 @@ def create_employ(db: Session, employ: schemas.Employe):
 
 
 def create_RH(db: Session, rh: schemas.RessourceHumaine):
-    os.system("cls")
     existing_rh = db.query(models.RessourceHumaine).filter(models.RessourceHumaine.UserName == rh.UserName).first()
     if existing_rh:
         raise HTTPException(status_code=400, detail="RH already registered")
