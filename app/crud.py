@@ -10,25 +10,6 @@ sessions: Dict[str, str] = {}
 def hash_password(password: str) -> str:
     return pwd_context.hash(password)
 
-def create_admin(db: Session, admin: schemas.Admin,response: Response):
-    existing_admin = db.query(models.Admin).filter(models.Admin.username == admin.username).first()
-    if existing_admin:
-        raise HTTPException(status_code=400, detail="Email already registered")
-    
-    admin = models.Admin(username=admin.username, password=hash_password(admin.password))
-    db.add(admin)
-    db.commit()
-    db.refresh(admin)
-
-    session_id = str(uuid4())
-    sessions[session_id] = admin.id
-
-    response.set_cookie(key="session_id", value=session_id)
-    print(sessions[session_id])
-    return admin
-
-
-
 def get_employe(db: Session):
     return db.query(models.Employe).all()
 
@@ -49,3 +30,32 @@ def get_conge(db: Session):
 
 def get_abscence(db: Session):
     return db.query(models.Abscence).all()
+
+def create_admin(db: Session, admin: schemas.Admin,response: Response):
+    existing_admin = db.query(models.Admin).filter(models.Admin.username == admin.username).first()
+    if existing_admin:
+        raise HTTPException(status_code=400, detail="Email already registered")
+    
+    admin = models.Admin(username=admin.username, password=hash_password(admin.password))
+    db.add(admin)
+    db.commit()
+    db.refresh(admin)
+
+    session_id = str(uuid4())
+    sessions[session_id] = admin.id
+
+    response.set_cookie(key="session_id", value=session_id)
+    print(sessions[session_id])
+    return admin
+
+def create_employ(db: Session, employ: schemas.Employe):
+    existing_employ = db.query(models.Employe).filter(models.Employe.UserName == employ.UserName).first()
+    if existing_employ:
+        raise HTTPException(status_code=400, detail="Employ already registered")
+    
+    employ = models.Employe(UserName=employ.UserName, PassWord=hash_password(employ.PassWord))
+    db.add(employ)
+    db.commit()
+    db.refresh(employ)
+
+    return employ

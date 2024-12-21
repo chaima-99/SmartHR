@@ -36,13 +36,7 @@ sessions: Dict[str, str] = {}
 def read_root():
     return {"message": "Welcome to your new API"}
 
-@app.post("/a", response_model=schemas.Admin)
-def create_admin(
-    admin: schemas.Admin, 
-    response: Response,  # Add this parameter
-    db: Session = Depends(get_db)
-):
-    return crud.create_admin(db=db, admin=admin, response=response)
+
 @app.get("/emp", response_model=List[schemas.Employe])
 def get_employe(db: Session = Depends(get_db)):
     return crud.get_employe(db=db)
@@ -72,9 +66,20 @@ def get_abscence(db: Session = Depends(get_db)):
     return crud.get_abscence(db=db)
 
 
+@app.post("/a", response_model=schemas.Admin)
+def create_admin(
+    admin: schemas.Admin, 
+    response: Response,  # Add this parameter
+    db: Session = Depends(get_db)
+):
+    return crud.create_admin(db=db, admin=admin, response=response)
 
-
-
+@app.post("/add_employe", response_model=schemas.Employe)
+def create_employ(
+    employ: schemas.Employe, 
+    db: Session = Depends(get_db)
+):
+    return crud.create_employ(db=db, employ=employ)
 
 
 

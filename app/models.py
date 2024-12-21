@@ -14,10 +14,10 @@ class Employe(Base):
     __tablename__ = "employe"
 
     id = Column(Integer, primary_key=True)
-    UserName = Column(String(50), unique=True, nullable=False)
-    PassWord = Column(String(255), nullable=False)
-    Nom = Column(String(100), nullable=False)
-    Prenom = Column(String(100), nullable=False)
+    UserName = Column(String(50), unique=True)
+    PassWord = Column(String(255))
+    Nom = Column(String(100))
+    Prenom = Column(String(100))
     DN = Column(Date, nullable=False)
     Mail = Column(String(100), unique=True, nullable=False)
     Horaire = Column(String(50), nullable=True)
