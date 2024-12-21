@@ -4,6 +4,7 @@ from fastapi import HTTPException, Response
 from sqlalchemy.orm import Session
 from app import models, schemas
 from passlib.context import CryptContext # type: ignore
+import os
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 sessions: Dict[str, str] = {}
@@ -67,18 +68,22 @@ def create_employ(db: Session, employ: schemas.Employe):
     return employ
 
 
-def create_RH(db: Session, rh: schemas.Ressource_Humaine):
-    existing_rh = db.query(models.Ressource_Humaine).filter(models.Ressource_Humaine.UserName == rh.UserName).first()
+def create_RH(db: Session, rh: schemas.RessourceHumaine):
+    os.system("cls")
+    existing_rh = db.query(models.RessourceHumaine).filter(models.RessourceHumaine.UserName == rh.UserName).first()
     if existing_rh:
         raise HTTPException(status_code=400, detail="RH already registered")
-    rh = models.Ressource_Humaine(UserName=rh.UserName,
+    rh = models.RessourceHumaine(UserName=rh.UserName,
                                     PassWord=hash_password(rh.PassWord),
                                     NomRH=rh.NomRH,
                                     DNRH=rh.DNRH,
                                     PrenomRH =rh.PrenomRH,
-                                    MailRH=rh.MailRH)
+                                    MailRH=rh.MailRH,
+                                    photo=rh.photo)
     db.add(rh)
     db.commit()
     db.refresh(rh)
 
     return rh
+
+

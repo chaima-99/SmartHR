@@ -10,7 +10,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 origins = [
     "http://localhost",  # Remplacez par l'URL de votre front-end, par exemple localhost si votre front-end est sur le même appareil
-    "http://localhost:8001",  # Si vous utilisez un autre port pour le front-end (par exemple avec React)
+    "http://localhost:8008",  # Si vous utilisez un autre port pour le front-end (par exemple avec React)
     "http://127.0.0.1",  # Si vous utilisez l'IP locale
     "http://127.0.0.1:5500",  # URL de votre page HTML si elle est servie sur ce port
     "http://localhost:8001",  # Optionnel si localhost est utilisé au lieu de 127.0.0.1
@@ -40,7 +40,7 @@ def read_root():
 def get_employe(db: Session = Depends(get_db)):
     return crud.get_employe(db=db)
 
-@app.get("/RH", response_model=List[schemas.Ressource_Humaine])
+@app.get("/RH", response_model=List[schemas.RessourceHumaine])
 def get_RH(db: Session = Depends(get_db)):
     return crud.get_RH(db=db)
 
@@ -80,11 +80,11 @@ def create_employ(
 ):
     return crud.create_employ(db=db, employ=employ)
 
-@app.post("/add_RH", response_model=schemas.Ressource_Humaine)
+@app.post("/add_RH", response_model=schemas.RessourceHumaine)
 def create_RH(
-    RH: schemas.Ressource_Humaine, 
+    RH: schemas.RessourceHumaine, 
     db: Session = Depends(get_db)
-):
+):  
     return crud.create_RH(db=db, RH=RH)
 
 

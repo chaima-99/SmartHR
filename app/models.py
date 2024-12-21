@@ -23,17 +23,17 @@ class Employe(Base):
     Horaire = Column(String(50), nullable=True)
     Photo = Column(String(255), nullable=True)
 
-class Ressource_Humaine(Base):
+class RessourceHumaine(Base):
     __tablename__ = "ressource_humaine"
 
-    id = Column(Integer, primary_key=True)
+    id = Column(Integer, primary_key=True, autoincrement=True)
     UserName = Column(String(50), unique=True, nullable=False)
     PassWord = Column(String(255), nullable=False)
     NomRH = Column(String(100), nullable=False)
     PrenomRH = Column(String(100), nullable=False)
     DNRH = Column(Date, nullable=False)
     MailRH = Column(String(100), unique=True, nullable=False)
-    photo= Column(String(255), nullable=True)
+    photo = Column(String(255), nullable=True)
 
 class Tache(Base):
     __tablename__ = "tache"
