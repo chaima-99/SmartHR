@@ -18,3 +18,6 @@ def create_admin(db: Session, admin: schemas.Admin):
     db.commit()
     db.refresh(admin)
     return admin
+
+def get_employe(db: Session):
+    return db.query(models.Employe).all()

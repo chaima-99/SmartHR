@@ -1,3 +1,4 @@
+from typing import List
 from fastapi import FastAPI, Depends, HTTPException
 from sqlalchemy.orm import Session
 from app import models, schemas, crud
@@ -36,5 +37,20 @@ def read_root():
 @app.post("/a", response_model=schemas.Admin)
 def create_admin(admin: schemas.Admin, db: Session = Depends(get_db)):
     return crud.create_admin(db=db, admin=admin)
+
+@app.get("/emp", response_model=List[schemas.Employe])
+def get_employe(db: Session = Depends(get_db)):
+    return crud.get_employe(db=db)
+
+
+
+
+
+
+
+
+
+
+
 
 
