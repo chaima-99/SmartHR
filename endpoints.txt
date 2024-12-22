@@ -1,15 +1,15 @@
 ADMIN:
     VOL_1:
-        POST /admin/users : Création de comptes utilisateurs (RH et employés) -------
+        ----------------------POST /admin/users : Création de comptes utilisateurs (RH et employés) -------
     VOL_2:
         POST /admin/check-system/configure : Configuration du système 
-        GET /admin/check-records : Vue d'ensemble des enregistrements
+        -----------------------GET /admin/check-records : Vue d'ensemble des enregistrements
 
 RH:
     VOL_1:
         ------------------- POST /auth/login : Authentification
         ------------------- GET /hr/employees : Liste des employés
-        PUT /hr/employees/{employee_id} : Modification des informations d'un employé
+        --------------------PUT /hr/employees/{employee_id} : Modification des informations d'un employé
     VOL_2:
         GET /hr/attendance/{employee_id} : Consultation des heures de présence
         GET /hr/statistics/global : Statistiques globales
@@ -34,12 +34,11 @@ RH:
 
 EMPLOYE:
     VOL_1:
-        POST /auth/employee/login : Authentification
-        GET /employee/profile : Consultation du profil
+        ---------------------POST /auth/employee/login : Authentification
+        ---------------------GET /employee/profile : Consultation du profil
         PUT /employee/profile : Modification du profil
     VOL_2;
         POST /employee/check : Enregistrement check-in/check-out avec reconnaissance faciale
-        GET /employee/dashboard : Tableau de bord personnel ??
         GET /employee/check-history : Historique des pointages        
     VOL_3:
         GET /employee/tasks : Consultation des tâches assignées

@@ -1,7 +1,7 @@
 from typing import Dict, List
 from urllib import response
 from uuid import uuid4
-from fastapi import FastAPI, Depends, HTTPException, Response
+from fastapi import FastAPI, Depends, HTTPException, Request, Response
 from sqlalchemy.orm import Session
 from app import models, schemas, crud
 from app.database import engine, get_db
@@ -104,7 +104,16 @@ def update_employe(
     db: Session = Depends(get_db)
 ):
     return crud.update_employe(db=db, employe_user=employe_username, employ=employ)
-    
+
+@app.post("/employee/profile", response_model=schemas.Employe)
+def get_employee_profile(
+    username: str,
+    request: Request,
+    db: Session = Depends(get_db)
+):
+    return crud.get_employee_profile(db=db, username=username, request=request)
+
+
 
 
 

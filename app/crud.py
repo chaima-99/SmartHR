@@ -1,6 +1,6 @@
 from typing import Dict, Union
 from uuid import uuid4
-from fastapi import HTTPException, Response
+from fastapi import HTTPException, Request, Response
 from sqlalchemy.orm import Session
 from app import models, schemas
 from passlib.context import CryptContext # type: ignore
@@ -131,6 +131,20 @@ def update_employe(db: Session, employe_user: str, employ: schemas.Employe):
     })
     db.commit()
     return {"message": "Employ updated successfully"}
+
+def get_employee_profile(db: Session, username: str, request: Request):
+    session_id = request.cookies.get("session_id")
+    session = sessions.get(session_id)
+    
+    employe = db.query(models.Employe).filter(models.Employe.UserName == username).first()
+    
+    if not employe:
+        raise HTTPException(status_code=404, detail="Employee not found")
+    
+    if not (employe.id == session["id"] and session["role"] == "employe"):
+        raise HTTPException(status_code=400, detail="Employee not found")
+    
+    return employe
 
 
 
