@@ -1,5 +1,5 @@
 from datetime import date, time
-from typing import Any, Optional
+from typing import Any, Literal, Optional
 from pydantic import BaseModel, EmailStr, Field
 from typing import Union
 
@@ -42,12 +42,15 @@ class EmployeTache(BaseModel):
     IDTache: int
     EtatTache: str
 
-class Historique(BaseModel):
-    IDHistorique: int
-    Date: date
+class HistoriqueCreate(BaseModel):
+    JourDeSemaine: int
+    Mois: int
     Heure: time
-    EventName: str
+    EventName: Literal['CheckIn', 'CheckOut']
     IDEmploye: int
+
+class HistoriqueResponse(HistoriqueCreate):
+    IDHistorique: int
 
 class Conge(BaseModel):
     IdConge: int

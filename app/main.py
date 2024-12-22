@@ -1,5 +1,5 @@
 from typing import Dict, List
-from urllib import response
+from urllib import request, response
 from uuid import uuid4
 from fastapi import FastAPI, Depends, HTTPException, Request, Response
 from sqlalchemy.orm import Session
@@ -52,7 +52,7 @@ def get_tache(db: Session = Depends(get_db)):
 def get_employe_tache(db: Session = Depends(get_db)):
     return crud.get_employe_tache(db=db)
 
-@app.get("/HISTORIQUE", response_model=List[schemas.Historique])
+@app.get("/HISTORIQUE", response_model=List[schemas.HistoriqueResponse])
 def get_historique(db: Session = Depends(get_db)):
     return crud.get_historique(db=db)
 
@@ -112,6 +112,15 @@ def get_employee_profile(
     db: Session = Depends(get_db)
 ):
     return crud.get_employee_profile(db=db, username=username, request=request)
+
+
+@app.get("/employee/check-history", response_model=List[schemas.HistoriqueResponse])
+def check_employee_history(
+    username: str,
+    request: Request,
+    db: Session = Depends(get_db)
+):
+    return crud.check_employee_history(db=db, username=username,request=request)
 
 
 

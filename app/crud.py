@@ -1,4 +1,5 @@
 from typing import Dict, Union
+from urllib import request
 from uuid import uuid4
 from fastapi import HTTPException, Request, Response
 from sqlalchemy.orm import Session
@@ -7,6 +8,7 @@ from passlib.context import CryptContext # type: ignore
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 sessions = {}
+
 def hash_password(password: str) -> str:
     return pwd_context.hash(password)
 
@@ -146,5 +148,19 @@ def get_employee_profile(db: Session, username: str, request: Request):
     
     return employe
 
+def check_employee_history(db: Session, username: str, request: Request):
+    employe = db.query(models.Employe).filter(models.Employe.UserName == username).first()
+    session_id = request.cookies.get("session_id")
+    session = sessions.get(session_id)
 
-
+    if not employe:
+        raise HTTPException(status_code=404, detail="Employe not found")
+    
+    if not (employe.id == session["id"] and session["role"] == "employe"):
+        raise HTTPException(status_code=400, detail="Employe not found")
+    try:
+        historiques= db.query(models.Historique).filter(models.Historique.IDEmploye == employe.id).all()
+        return historiques
+    except Exception as e:
+        print(f"Erreur interne : {e}")
+        raise HTTPException(status_code=500, detail="Erreur interne du serveur")
