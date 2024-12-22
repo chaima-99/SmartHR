@@ -164,3 +164,20 @@ def check_employee_history(db: Session, username: str, request: Request):
     except Exception as e:
         print(f"Erreur interne : {e}")
         raise HTTPException(status_code=500, detail="Erreur interne du serveur")
+    
+def get_employee_tasks(db: Session, username: str, request: Request):
+    employe = db.query(models.Employe).filter(models.Employe.UserName == username).first()
+    session_id = request.cookies.get("session_id")
+    session = sessions.get(session_id)
+
+    if not employe:
+        raise HTTPException(status_code=404, detail="Employe not found")
+    
+    if not (employe.id == session["id"] and session["role"] == "employe"):
+        raise HTTPException(status_code=400, detail="Employe not found")
+    try:
+        taches = db.query(models.EmployeTache).filter(models.EmployeTache.IDEmploye == employe.id).all()
+        return taches
+    except Exception as e:
+        print(f"Erreur interne : {e}")
+        raise HTTPException(status_code=500, detail="Erreur interne du serveur")

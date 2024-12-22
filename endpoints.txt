@@ -37,11 +37,11 @@ EMPLOYE:
         ---------------------POST /auth/employee/login : Authentification
         ---------------------GET /employee/profile : Consultation du profil
         ---------------------PUT /employee/profile : Modification du profil
-    VOL_2;
+    VOL_2:
         POST /employee/check : Enregistrement check-in/check-out avec reconnaissance faciale
         ----------------------GET /employee/check-history : Historique des pointages        
     VOL_3:
-        GET /employee/tasks : Consultation des tâches assignées
+        ----------------------GET /employee/tasks : Consultation des tâches assignées
         PUT /employee/tasks/{task_id} : Mise à jour du statut des tâches
         GET /employee/tasks/statistics : Statistiques personnelles
     VOL_4:

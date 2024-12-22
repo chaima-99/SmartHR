@@ -122,6 +122,14 @@ def check_employee_history(
 ):
     return crud.check_employee_history(db=db, username=username,request=request)
 
+@app.get("/employee/tasks", response_model=List[schemas.EmployeTache])
+def get_employee_tasks(
+    username: str,
+    request: Request,
+    db: Session = Depends(get_db)
+):
+    return crud.get_employee_tasks(db=db, username=username,request=request)
+
 
 
 
