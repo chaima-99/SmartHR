@@ -42,7 +42,7 @@ EMPLOYE:
         ----------------------GET /employee/check-history : Historique des pointages        
     VOL_3:
         ----------------------GET /employee/tasks : Consultation des tâches assignées
-        PUT /employee/tasks/{task_id} : Mise à jour du statut des tâches
+        ----------------------PUT /employee/tasks/{task_id} : Mise à jour du statut des tâches
         GET /employee/tasks/statistics : Statistiques personnelles
     VOL_4:
         POST /employee/leaves : Soumission d'une demande de congés

@@ -68,7 +68,6 @@ class Abscence(BaseModel):
     IDEmploye: int
 
 class LoginResponse(BaseModel):
-    user: Union[Admin, Employe, RessourceHumaine]
     role: str
 
 class SuccessResponse(BaseModel):

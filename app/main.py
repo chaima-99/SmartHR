@@ -9,11 +9,8 @@ from fastapi.middleware.cors import CORSMiddleware
 
 
 origins = [
-    "http://localhost",  # Remplacez par l'URL de votre front-end, par exemple localhost si votre front-end est sur le même appareil
-    "http://localhost:8008",  # Si vous utilisez un autre port pour le front-end (par exemple avec React)
-    "http://127.0.0.1",  # Si vous utilisez l'IP locale
-    "http://127.0.0.1:5500",  # URL de votre page HTML si elle est servie sur ce port
-    "http://localhost:8001",  # Optionnel si localhost est utilisé au lieu de 127.0.0.1
+    # Si vous utilisez l'IP locale
+    "http://localhost:8008",  # Optionnel si localhost est utilisé au lieu de 127.0.0.1
 ]
 
 
