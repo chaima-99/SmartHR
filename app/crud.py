@@ -109,17 +109,17 @@ def login(db: Session, username: str, password: str, response: Response):
         # Check Employe table
         employe = db.query(models.Employe).filter(models.Employe.UserName == username).first()
         if employe and pwd_context.verify(password, employe.PassWord):
-            #session_id = str(uuid4())
-            #sessions[session_id] = {"id": employe.id, "role": "employe"}
-            #response.set_cookie(key="session_id", value=session_id)
+            session_id = str(uuid4())
+            sessions[session_id] = {"id": employe.id, "role": "employe"}
+            response.set_cookie(key="session_id", value=session_id)
             return {"role": "employe"}
 
         # Check RessourceHumaine table
         rh = db.query(models.RessourceHumaine).filter(models.RessourceHumaine.UserName == username).first()
         if rh and pwd_context.verify(password, rh.PassWord):
-            #session_id = str(uuid4())
-            #sessions[session_id] = {"id": rh.id, "role": "rh"}
-            #response.set_cookie(key="session_id", value=session_id)
+            session_id = str(uuid4())
+            sessions[session_id] = {"id": rh.id, "role": "rh"}
+            response.set_cookie(key="session_id", value=session_id)
             return {"role": "rh"}
 
         raise HTTPException(status_code=400, detail="Incorrect username or password")
