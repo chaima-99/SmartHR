@@ -7,8 +7,8 @@ ADMIN:
 
 RH:
     VOL_1:
-        POST /auth/login : Authentification
-        GET /hr/employees : Liste des employés
+        ------------------- POST /auth/login : Authentification
+        ------------------- GET /hr/employees : Liste des employés
         PUT /hr/employees/{employee_id} : Modification des informations d'un employé
     VOL_2:
         GET /hr/attendance/{employee_id} : Consultation des heures de présence

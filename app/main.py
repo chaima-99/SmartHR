@@ -96,6 +96,14 @@ def login(
     db: Session = Depends(get_db)
 ):
     return crud.login(db=db, username=username, password=password, response=response)
+
+@app.put("/update/employe/{employe_username}", response_model =schemas.SuccessResponse)
+def update_employe(
+    employe_username: str,
+    employ: schemas.Employe,
+    db: Session = Depends(get_db)
+):
+    return crud.update_employe(db=db, employe_user=employe_username, employ=employ)
     
 
 

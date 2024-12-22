@@ -115,3 +115,22 @@ def login(db: Session, username: str, password: str, response: Response):
         print(f"Erreur interne : {e}")
         raise HTTPException(status_code=500, detail="Erreur interne du serveur")
 
+def update_employe(db: Session, employe_user: str, employ: schemas.Employe):
+    existing_employ = db.query(models.Employe).filter(models.Employe.UserName == employe_user).first()
+    if not existing_employ:
+        raise HTTPException(status_code=400, detail="Employ not found")
+    db.query(models.Employe).filter(models.Employe.UserName == employe_user).update({
+        "UserName": employ.UserName,
+        "PassWord": hash_password(employ.PassWord),
+        "Nom": employ.Nom,
+        "DN": employ.DN,
+        "Prenom": employ.Prenom,
+        "Mail": employ.Mail,
+        "Horaire": employ.Horaire,
+        "Photo": employ.Photo
+    })
+    db.commit()
+    return {"message": "Employ updated successfully"}
+
+
+

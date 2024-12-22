@@ -19,7 +19,7 @@ class Employe(Base):
     Nom = Column(String(100))
     Prenom = Column(String(100))
     DN = Column(Date, nullable=False)
-    Mail = Column(String(100), unique=True, nullable=False)
+    Mail = Column(String(100),nullable=False)
     Horaire = Column(String(50), nullable=True)
     Photo = Column(String(255), nullable=True)
 

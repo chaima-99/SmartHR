@@ -67,3 +67,6 @@ class Abscence(BaseModel):
 class LoginResponse(BaseModel):
     user: Union[Admin, Employe, RessourceHumaine]
     role: str
+
+class SuccessResponse(BaseModel):
+    message: str
