@@ -130,6 +130,14 @@ def get_employee_tasks(
 ):
     return crud.get_employee_tasks(db=db, username=username,request=request)
 
+@app.put("/employee/tasks/{task_id}", response_model=schemas.SuccessResponse)
+def update_employee_task(
+    task_id: int,
+    request: Request,
+    new_status: str,
+    db: Session = Depends(get_db)
+):
+    return crud.update_employee_task(db=db, task_id=task_id, new_status=new_status, request=request)
 
 
 

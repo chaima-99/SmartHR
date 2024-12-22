@@ -9,6 +9,14 @@ from passlib.context import CryptContext # type: ignore
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 sessions = {}
 
+def user_current(request: Request):
+    session_id = request.cookies.get("session_id")
+    if session_id is None:
+        return None  # Return None if no session ID exists
+    return sessions.get(session_id)  # Return the session object, which should be a dictionary
+
+
+
 def hash_password(password: str) -> str:
     return pwd_context.hash(password)
 
@@ -181,3 +189,25 @@ def get_employee_tasks(db: Session, username: str, request: Request):
     except Exception as e:
         print(f"Erreur interne : {e}")
         raise HTTPException(status_code=500, detail="Erreur interne du serveur")
+
+def update_employee_task(db: Session, task_id: int, new_status: str, request: Request):
+    # Check if user is logged in
+    current_user = user_current(request)
+    if not current_user:
+        raise HTTPException(status_code=400, detail="Employe not authenticated")
+    
+    # Assuming 'current_user' is a dictionary with 'id' as one of its keys
+    id_employe = current_user.get("id")  # Get 'id' from the dictionary
+
+    if not id_employe:
+        raise HTTPException(status_code=400, detail="Employe ID not found")
+
+    # Find the task and update its status
+    db.query(models.EmployeTache).filter(
+        models.EmployeTache.IDTache == task_id,
+        models.EmployeTache.IDEmploye == id_employe
+    ).update({"EtatTache": new_status})
+
+    db.commit()
+
+    return {"message": "Task updated successfully"}
