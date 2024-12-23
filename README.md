@@ -54,5 +54,29 @@ Avant de commencer, assurez-vous que les éléments suivants sont installés sur
 1. **Cloner le dépôt** :
 
    ```bash
-   git clone https://github.com/votre-utilisateur/rh-management.git
-   cd rh-management
+   git clone https://NorIslam04/HR-management-FastAPI-Backend
+   cd HR-management-FastAPI-Backend
+   
+2. **Créer et activer un environnement virtuel** :
+
+  ```bash
+  python -m venv venv
+  source venv/bin/activate  # Windows : venv\Scripts\activate
+```
+
+3. **Installer les dépendances** :
+
+   ```bash
+   pip install -r requirements.txt
+
+4. **Lancer le serveur** :
+   ```bash
+     uvicorn app.main:app --reload
+   ```
+
+####Cet exemple est structuré pour inclure des détails sur l'installation, l'utilisation, et les endpoints. Si vous avez des fonctionnalités ou exigences supplémentaires, faites-le-moi savoir ! 😊
+
+
+
+
+   
