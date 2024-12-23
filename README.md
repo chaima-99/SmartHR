@@ -59,10 +59,10 @@ Avant de commencer, assurez-vous que les éléments suivants sont installés sur
    
 2. **Créer et activer un environnement virtuel** :
 
-  ```bash
-  python -m venv venv
-  source venv/bin/activate  # Windows : venv\Scripts\activate
-```
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # Windows : venv\Scripts\activate
+   ```
 
 3. **Installer les dépendances** :
 
@@ -74,7 +74,8 @@ Avant de commencer, assurez-vous que les éléments suivants sont installés sur
      uvicorn app.main:app --reload
    ```
 
-####Cet exemple est structuré pour inclure des détails sur l'installation, l'utilisation, et les endpoints. Si vous avez des fonctionnalités ou exigences supplémentaires, faites-le-moi savoir ! 😊
+
+#### Cet exemple est structuré pour inclure des détails sur l'installation, l'utilisation, et les endpoints. Si vous avez des fonctionnalités ou exigences supplémentaires, faites-le-moi savoir ! 😊
 
 
 
