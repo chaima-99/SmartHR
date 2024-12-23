@@ -1,0 +1,17 @@
+{
+    "tasks": [
+      { "id": 1, "name": "Try me out" },
+      { "id": 2, "name": "Empty task" },
+      { "id": 3, "name": "Empty task" }
+    ],
+    "calendarData": [
+      { "day": 1, "type": "absence" },
+      { "day": 4, "type": "tardiness" },
+      { "day": 10, "type": "normal" }
+    ],
+    "statistics": {
+      "absence": 1,
+      "tardiness": 4,
+      "tasks": 10
+    }
+  }
