@@ -72,3 +72,7 @@ class LoginResponse(BaseModel):
 
 class SuccessResponse(BaseModel):
     message: str
+
+class LoginRequest(BaseModel):
+    username: str
+    password: str

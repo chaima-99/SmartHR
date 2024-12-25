@@ -10,7 +10,8 @@ from fastapi.middleware.cors import CORSMiddleware
 
 origins = [
     # Si vous utilisez l'IP locale
-    "http://localhost:8008",  # Optionnel si localhost est utilisé au lieu de 127.0.0.1
+    "http://localhost:8008",
+    "http://localhost:5173"
 ]
 
 
@@ -86,13 +87,8 @@ def create_RH(
 
 
 @app.post("/auth/login", response_model=schemas.LoginResponse)
-def login(
-    username: str,
-    password: str,
-    response: Response,
-    db: Session = Depends(get_db)
-):
-    return crud.login(db=db, username=username, password=password, response=response)
+def login(credentials: schemas.LoginRequest, response: Response, db: Session = Depends(get_db)):
+    return crud.login(db=db, username=credentials.username, password=credentials.password, response=response)
 
 @app.put("/update/employe/{employe_username}", response_model =schemas.SuccessResponse)
 def update_employe(
